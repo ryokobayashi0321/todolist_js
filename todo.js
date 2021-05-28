@@ -1,6 +1,6 @@
 const addButton = document.querySelector('.todo-button');
 const todoInput = document.querySelector('.todo-input');
-const todoLIst = document.querySelector('.todo-list');
+const todoList = document.querySelector('.todo-list');
 
 const addTodo = () => {
   // 入力値フォームが空欄の場合追加しない
@@ -15,7 +15,7 @@ const addTodo = () => {
   newTodo.appendChild(todoContent);
 
   // 完了 未着手ボタン
-  todoLIst.appendChild(newTodo);
+  todoList.appendChild(newTodo);
   const checkButton = document.createElement('button');
   checkButton.addEventListener('click', switchState);
   checkButton.innerText = '□未着手';
@@ -24,12 +24,13 @@ const addTodo = () => {
 
   // 削除ボタン
   const deleteButton = document.createElement('button');
+  deleteButton.addEventListener('click', deleteTodo);
   deleteButton.innerText = '削除';
   deleteButton.classList.add('delete-button');
   newTodo.appendChild(deleteButton);
 
   // 入力内容をリストに追加
-  todoLIst.appendChild(newTodo);
+  todoList.appendChild(newTodo);
 
   // 入力フォームの値を削除
   todoInput.value = '';
@@ -45,5 +46,10 @@ const switchState = (e) => {
     checkButton.classList.remove('complete');
   }
 };
+
+const deleteTodo = (e) => {
+  const todoList = e.target.closest('li');
+  todoList.remove();
+}
 
 addButton.addEventListener('click', addTodo);
