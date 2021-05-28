@@ -3,6 +3,9 @@ const todoInput = document.querySelector('.todo-input');
 const todoLIst = document.querySelector('.todo-list');
 
 const addTodo = () => {
+  // 入力値フォームが空欄の場合追加しない
+  if (todoInput.value === '') return;
+
   const newTodo = document.createElement('li');
 
   // タスク名
@@ -24,7 +27,11 @@ const addTodo = () => {
   deleteButton.classList.add('delete-button');
   newTodo.appendChild(deleteButton);
 
+  // 入力内容をリストに追加
   todoLIst.appendChild(newTodo);
+
+  // 入力フォームの値を削除
+  todoInput.value = '';
 };
 
 addButton.addEventListener('click', addTodo);
