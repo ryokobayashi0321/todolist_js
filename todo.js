@@ -17,6 +17,7 @@ const addTodo = () => {
   // 完了 未着手ボタン
   todoLIst.appendChild(newTodo);
   const checkButton = document.createElement('button');
+  checkButton.addEventListener('click', switchState);
   checkButton.innerText = '□未着手';
   checkButton.classList.add('check-button');
   newTodo.appendChild(checkButton);
@@ -32,6 +33,17 @@ const addTodo = () => {
 
   // 入力フォームの値を削除
   todoInput.value = '';
+};
+
+const switchState = (e) => {
+  let checkButton = e.target;
+  if (!checkButton.classList.contains('complete')) {
+    checkButton.innerHTML = '完了';
+    checkButton.classList.add('complete');
+  } else {
+    checkButton.innerHTML = '□未着手';
+    checkButton.classList.remove('complete');
+  }
 };
 
 addButton.addEventListener('click', addTodo);
