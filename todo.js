@@ -19,14 +19,14 @@ const addTodo = () => {
   todoList.appendChild(newTodo);
   const checkButton = document.createElement('button');
   checkButton.addEventListener('click', switchState);
-  checkButton.innerText = '□未着手';
+  checkButton.innerHTML = '<i class="far fa-check-square"></i>';
   checkButton.classList.add('check-button');
   newTodo.appendChild(checkButton);
 
   // 削除ボタン
   const deleteButton = document.createElement('button');
   deleteButton.addEventListener('click', deleteTodo);
-  deleteButton.innerText = '削除';
+  deleteButton.innerHTML = '<i class="fas fa-trash"></i> ';
   deleteButton.classList.add('delete-button');
   newTodo.appendChild(deleteButton);
 
@@ -38,12 +38,12 @@ const addTodo = () => {
 };
 
 const switchState = (e) => {
-  let checkButton = e.target;
+  const checkButton = e.target.closest('.check-button')
   if (!checkButton.classList.contains('complete')) {
-    checkButton.innerHTML = '完了';
+    checkButton.innerHTML = '<i class="fas fa-check-square"></i>';
     checkButton.classList.add('complete');
   } else {
-    checkButton.innerHTML = '□未着手';
+    checkButton.innerHTML = '<i class="far fa-check-square"></i>';
     checkButton.classList.remove('complete');
   }
 };
