@@ -11,6 +11,7 @@ const addTodo = () => {
   // タスク名
   const todoContent = document.createElement('span')
   todoContent.innerText = todoInput.value;
+  todoContent.addEventListener('click', editTodo);
   todoContent.classList.add('todo-content');
   newTodo.appendChild(todoContent);
 
@@ -50,6 +51,32 @@ const switchState = (e) => {
 const deleteTodo = (e) => {
   const todoList = e.target.closest('li');
   todoList.remove();
+};
+
+// フォーカスが外れた際（編集完了後）にフィールドを消去する関数
+const saveTodoContent = (e) => {
+  const itemToSave = e.target;
+  const textValue = itemToSave.value;
+  if (textValue !== '') {
+    itemToSave.parentNode.textContent = textValue;
+  }
+};
+
+const editTodo = (e) => {
+  const itemToEdit = e.target;
+
+  // 編集用のテキストフィールドに置き換え
+  const input = document.createElement('input');
+  input.setAttribute('type', 'text');
+  input.classList.add('editbox');
+  input.setAttribute('value', itemToEdit.textContent);
+  itemToEdit.textContent = '';
+  itemToEdit.appendChild(input);
+
+  const editContent = itemToEdit.querySelector('.editbox');
+  // フォーカスが外れた際（編集完了後）にフィールドを除去するイベントを追加
+  editContent.addEventListener('blur', saveTodoContent);
 }
+
 
 addButton.addEventListener('click', addTodo);
