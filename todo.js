@@ -4,6 +4,26 @@ const todoLIst = document.querySelector('.todo-list');
 
 const addTodo = () => {
   const newTodo = document.createElement('li');
+
+  // タスク名
+  const todoContent = document.createElement('span')
+  todoContent.innerText = todoInput.value;
+  todoContent.classList.add('todo-content');
+  newTodo.appendChild(todoContent);
+
+  // 完了 未着手ボタン
+  todoLIst.appendChild(newTodo);
+  const checkButton = document.createElement('button');
+  checkButton.innerText = '□未着手';
+  checkButton.classList.add('check-button');
+  newTodo.appendChild(checkButton);
+
+  // 削除ボタン
+  const deleteButton = document.createElement('button');
+  deleteButton.innerText = '削除';
+  deleteButton.classList.add('delete-button');
+  newTodo.appendChild(deleteButton);
+
   todoLIst.appendChild(newTodo);
 };
 
